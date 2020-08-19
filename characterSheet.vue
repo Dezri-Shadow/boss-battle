@@ -36,19 +36,18 @@
         </button>
       </div>
        <button
-              type="button"
-              class="btn-green"
-              @click="close"
-              aria-label="Close modal"
-            >
-              Close
-            </button>
+          type="button"
+          class="btn-green"
+          @click="close"
+          aria-label="Close modal"
+        >
+          Close
+        </button>
     </div>
   </div>
 </template>
 
 <script>
-
 
 export default {
   name: 'characterSheet',
@@ -78,6 +77,7 @@ export default {
         this.magDef += 1;
         this.hp += 1;
         this.level++;
+        this.$emit('levelUp');
       },
 
       levelDown() {
@@ -87,6 +87,7 @@ export default {
         this.magDef -= 1;
         this.hp -= 1;
         this.level--;
+        this.$emit('levelDown');
       }
     }
 }

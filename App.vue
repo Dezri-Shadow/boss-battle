@@ -14,26 +14,38 @@
     <characterSheet
       v-show="isCharacterSheetVisible"
       @close="closeCharacterSheet"
+      @levelUp="levelUp"
+      @levelDown="levelDown"
     ></characterSheet>
+
+    <battle 
+      v-show="fight"
+      @close="closeBattle"
+      :level='level'
+      ></battle>
   </div>
 
 </template>
 
 <script>
 import characterSheet from './components/characterSheet.vue';
+import battle from './components/battle.vue';
 
 export default {
   name: 'App',
   components: {
-    characterSheet
+    characterSheet,
+    battle
   },
 
   data () {
       return {
         isCharacterSheetVisible: false,
+        fight: false,
         pos: -616,
         heroUrl: require( "./assets/hero1.png" ),
-        bossUrl: require( './assets/dragon.png' )
+        bossUrl: require( './assets/dragon.png' ),
+        level: 1
       };
   },
   computed: {
@@ -50,10 +62,19 @@ export default {
       closeCharacterSheet() {
         this.isCharacterSheetVisible = false;
       },
+      closeBattle() {
+        this.fight = false;
+      },
+      levelUp() {
+        level++;
+      },
+      levelDown() {
+        level--;
+      },
       moveRight() {
         this.pos += 84; 
         if(this.pos == 560){
-          alert('fight');
+          this.fight = true;
         }
       }
   }
